@@ -1,7 +1,7 @@
 
 import numpy as np
 
-n = 10000
+n = 2000
 x = 50
 
 
