@@ -27,5 +27,10 @@ E = [Newton_method(0, M, function, derivative) for M in M_s]
 x = a * (np.cos(E) - e)
 b = a * np.sqrt(1 - e ** 2)
 y = b * np.sin(E)
-plt.plot(x, y)
+
+fig = plt.figure()
+ax = fig.add_subplot()
+ax.set_aspect('equal')
+ax.plot(x, y)
+plt.savefig('kepler')
 plt.show()
