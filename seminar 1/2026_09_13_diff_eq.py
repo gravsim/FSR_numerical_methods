@@ -2,13 +2,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-n = 1000
 
 x = np.linspace(-5, 20, 30)
 y = np.linspace(-7, 7, 30)
 xx, yy = np.meshgrid(x, y)
 alpha = np.arctan(xx - yy ** 2)
-N = 1000
+
 k_x = np.cos(alpha)
 k_y = np.sin(alpha)
 
