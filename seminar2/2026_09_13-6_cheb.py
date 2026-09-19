@@ -26,7 +26,7 @@ ax[0].plot(x, f(x), 'o', label="points")
 ax[0].plot(bins, y, label="cheb")
 ax[0].plot(bins, f(bins), label="f(x)")
 
-ax[0].set_title(r'$f(x)=\sin(6x)+sign(\sin(x+e^{2x}))$ для 10 точек', loc='left')
+ax[0].set_title(r'$f(x)=\frac{e^{3x}\sin(200x^2)}{1+20x^2}, 0\leqslant{x}\leqslant{1}$ для 10 точек', loc='left')
 ax[0].legend()
 
 
