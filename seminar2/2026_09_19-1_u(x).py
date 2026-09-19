@@ -1,8 +1,7 @@
 
 import numpy as np
-import scipy as sp
-from scipy.interpolate import barycentric_interpolate, lagrange
-from numpy import polyfit, polyval
+from scipy.interpolate import lagrange
+from numpy import polyval
 import matplotlib.pyplot as plt
 
 def u(x, g0, g1, g2):

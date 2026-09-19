@@ -8,7 +8,6 @@ def function(x):
     return np.exp(3 * x) * np.sin(200 * x ** 2) / (1 + 20 * x ** 2)
 
 
-# sp.interpolate.lagrange()
 observed_x, _ = sp.special.roots_chebyt(20)
 observed_y = function(observed_x)
 x = np.linspace(np.min(observed_x), np.max(observed_x), 1000)
