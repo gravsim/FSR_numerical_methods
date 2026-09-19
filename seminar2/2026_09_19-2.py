@@ -22,7 +22,7 @@ plt.plot(bins, y_linear, label="linear")
 plt.plot(bins, y_cheb, label="cheb")
 
 
-plt.title(r'Интерполяция полинома $f=\frac{1}{1+25x^2}$ для 14 точек')
+plt.title(r'Интерполяция полинома $f(x)=\frac{1}{1+25x^2}$ для 14 точек')
 plt.legend()
 plt.savefig('2_interpolation.png', dpi=300)
 plt.show()
