@@ -1,24 +1,33 @@
 
 import numpy as np
 
-n = 2000
-x = 50
+h = 6.62607015e-34
+c = 299792458
+k = 1.380649e-23
+
+def I(l, T):
+    return 2 * np.pi * h * c ** 2 / (l ** 5) * 1 / (np.exp(h * c / (l * k * T)) - 1)
 
 
+def x(l, T):
+    return h * c / (l * k * T)
 
-def factorial(n):
-    answer = 1
-    i = 1
-    while i < n:
-        i += 1
-        answer *= i
+def b(x):
+    return h * c / (k * x)
 
-    return answer
 
-def exp(x):
-    result = 0
-    for i in range(1, n):
-        result += x ** i / factorial(i)
-    return result
+def f(x):
+    return 5 * np.exp(-x) + x - 5
 
-print(np.exp(x), exp(x), np.exp(x) - exp(x))
+
+def der(x):
+    return -5 * np.exp(-x) + 1
+
+def Newton(x0):
+
+    x = x0 - f(x0) / der(x0)
+    while np.abs(f(x) / f(x0)) > 10e-6:
+        x = x - f(x) / der(x)
+    return x
+
+print(b(Newton(100)))

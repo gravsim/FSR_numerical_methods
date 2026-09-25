@@ -1,10 +1,9 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.interpolate import lagrange
 
 
-x = np.array([1, 2, 3])
+x = np.array([1, 2, 4])
 y = np.array([-1, -2, 1])
 der_a = -1
 der2_b = 2
