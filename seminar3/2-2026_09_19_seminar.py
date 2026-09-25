@@ -7,7 +7,7 @@ from scipy.interpolate import CubicSpline
 
 
 der_a = 0.2
-der_b = -1
+der_b = -10
 
 x_observed = np.array([0, 1, 2, 3])
 y_observed = np.array([0, 0.5, 2, 1.5])
@@ -47,6 +47,6 @@ for i in range(len(A3)):
     y = np.polyval([A3[i], A2[i], A1[i], A0[i]], bins)
     plt.scatter(x_observed, y_observed)
     plt.plot(bins + x_observed[i], y)
-plt.title("Интерполяционный сплайн с без учета производных (ошибка)")
+plt.title("Интерполяционный сплайн без учета изменения СУ (ошибка)")
 plt.savefig('2_seminar_error.png', dpi=300)
 plt.show()
