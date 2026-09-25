@@ -6,8 +6,8 @@ from scipy.interpolate import CubicSpline
 #========= 1 задача ============
 
 
-s_a = 0.2
-s_b = -1
+der_a = 0.2
+der_b = -1
 
 x_observed = np.array([0, 1, 2, 3])
 y_observed = np.array([0, 0.5, 2, 1.5])
@@ -28,8 +28,8 @@ A = a1 + a2 + a3
 
 M = np.linalg.solve(A, b)
 
-M0 = 3 / h[0] * (d[0] - s_a) - M[0] / 2
-M_n = 3 / h[-1] * (s_b - d[-1]) - M[-1] / 2
+M0 = 3 / h[0] * (d[0] - der_a) - M[0] / 2
+M_n = 3 / h[-1] * (der_b - d[-1]) - M[-1] / 2
 
 M = np.hstack([M0, M, M_n])
 # print(M)
@@ -37,7 +37,7 @@ M = np.hstack([M0, M, M_n])
 
 
 A3 = (M[1:] - M[:-1]) / (6 * h)
-A2 = M[:-1]/2
+A2 = M[:-1] / 2
 A1 = d - h * (2 * M[:-1] + M[1:]) / 6
 A0 = y_observed[:-1]
 
@@ -47,4 +47,6 @@ for i in range(len(A3)):
     y = np.polyval([A3[i], A2[i], A1[i], A0[i]], bins)
     plt.scatter(x_observed, y_observed)
     plt.plot(bins + x_observed[i], y)
+plt.title("Интерполяционный сплайн с без учета производных (ошибка)")
+plt.savefig('2_seminar_error.png', dpi=300)
 plt.show()
