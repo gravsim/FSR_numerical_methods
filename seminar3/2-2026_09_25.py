@@ -17,12 +17,15 @@ A_up = np.diag(h[1:-1], k=1)
 A_middle = np.diag(2 * (h[1:] + h[:-1]), k=0)
 A_down = np.diag(h[1:-1], k=-1)
 
-
+print(A_up)
+print(A_middle)
+print(A_down)
 A = A_up + A_middle + A_down
 
 A[0][0] -= 0.5 * h[0]
 A[-1][-1] -= 0.5 * h[-1]
 
+print(A)
 b[0] -= 3 * (d[0] - der_a)
 b[-1] -= 3 * (der_b - d[-1])
 
@@ -43,7 +46,7 @@ cs = CubicSpline(x_observed, y_observed)
 
 fig, ax = plt.subplots(figsize=(6.5, 4))
 ax.plot(x_observed, y_observed, 'o', label='Data')
-ax.plot(bins, cs(bins), label='Cubic spline')
+# ax.plot(bins, cs(bins), label='Cubic spline')
 
 for k in range(len(coef0)):
     bins = np.linspace(x_observed[k], x_observed[k + 1], 100) - x_observed[k]
@@ -69,11 +72,11 @@ coef1 = d - h / 6 * (2 * m[:-1] + m[1:])
 coef2 = m[:-1] / 2
 coef3 = (m[1:] - m[:-1]) / (6 * h)
 
-for k in range(len(coef0)):
-    bins = np.linspace(x_observed[k], x_observed[k + 1], 100) - x_observed[k]
-
-    y = np.polyval([coef3[k], coef2[k], coef1[k], coef0[k]], bins)
-    ax.plot(x_observed[k] + bins, y, color='blue')
+# for k in range(len(coef0)):
+#     bins = np.linspace(x_observed[k], x_observed[k + 1], 100) - x_observed[k]
+#
+#     y = np.polyval([coef3[k], coef2[k], coef1[k], coef0[k]], bins)
+#     ax.plot(x_observed[k] + bins, y, color='blue')
 
 ax.legend()
 plt.title("Интерполяционный сплайн с изменением СУ (правильно)")

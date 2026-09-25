@@ -6,6 +6,7 @@ from numpy import polyval
 
 def f(x):
     return np.sin(3 * x / 2 + 1)
+
 a = 0
 b = np.pi
 N = 9
@@ -22,9 +23,10 @@ y_linear = polyval(coefs_linear, bins)
 y_cheb = polyval(coefs_cheb, bins)
 
 plt.plot(bins, f(bins), label='true')
-plt.plot(x_linear, y_linear, label='linear')
-plt.plot(x_cheb, y_cheb, label='cheb')
+plt.plot(bins, y_linear, label='linear')
+plt.plot(bins, y_cheb, label='cheb')
 plt.scatter(x_linear, f(x_linear))
 plt.scatter(x_cheb, f(x_cheb))
+plt.legend()
 plt.savefig('task2var1.png', dpi=300)
 plt.show()
