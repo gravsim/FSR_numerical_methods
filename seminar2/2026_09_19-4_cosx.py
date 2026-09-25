@@ -9,7 +9,12 @@ def f(x):
 bins = np.linspace(0, 1.2, 1000)
 
 x_linear = np.linspace(0, 1.2, N)
-x_cheb = (roots_chebyt(N)[0] + 1) * 1.2 / 2
+
+
+a = 0
+b = 1.2
+
+x_cheb =  (a + b) / 2 + (b - a ) / 2 * roots_chebyt(N)[0]
 
 degree = 3
 coef_linear = polyfit(x_linear, f(x_linear), degree)

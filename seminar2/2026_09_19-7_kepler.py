@@ -18,7 +18,10 @@ N = 5
 bins = np.linspace(0, 2 * np.pi, 1000)
 
 t_linear = np.linspace(0, 2 * np.pi, N)
-t_cheb = ((roots_chebyt(N)[0] + 1) * np.pi)
+a1 = 0
+b1 = 2 * np.pi
+
+t_cheb =  (a1 + b1) / 2 + (b1 - a1) / 2 * roots_chebyt(N)[0]
 
 x_coef_linear = lagrange(t_linear, x(t_linear)).coef
 y_coef_linear = lagrange(t_linear, y(t_linear)).coef

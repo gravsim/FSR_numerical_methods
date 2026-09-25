@@ -7,10 +7,12 @@ N = 5
 def f(x):
     return np.sin(x)
 bins = np.linspace(0, np.pi, 1000)
+a = 0
+b1 = np.pi / 2
+b2 = np.pi
 
-
-x_half_pi = (roots_chebyt(N)[0] + 1) * np.pi / 4
-x_pi = (roots_chebyt(N)[0] + 1) * np.pi / 2
+x_half_pi =  (a + b1) / 2 + (b1 - a ) / 2 * roots_chebyt(N)[0]
+x_pi = (a + b2) / 2 + (b2 - a ) / 2 * roots_chebyt(N)[0]
 
 coef_half_pi = polyfit(x_half_pi, f(x_half_pi), N - 1)
 coef_pi = polyfit(x_pi, f(x_pi), N - 1)
