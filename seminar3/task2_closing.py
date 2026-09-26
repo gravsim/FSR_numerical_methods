@@ -33,12 +33,6 @@ def closing(ax, x, y, der_a, der_b):
     coef2 = m[:-1] / 2
     coef3 = (m[1:] - m[:-1]) / (6 * h)
 
-    bins = np.linspace(x[0], x[-1], 1000)
-    cs = CubicSpline(x, y)
-
-    ax.plot(x, y, 'o', label='Data')
-    ax.plot(bins, cs(bins), label='Cubic spline')
-
     for k in range(len(coef0)):
         bins = np.linspace(x[k], x[k + 1], 100) - x[k]
 

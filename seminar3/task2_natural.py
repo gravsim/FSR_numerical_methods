@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import CubicSpline
 
 
-def closing(ax, x, y):
+def natural(ax, x, y):
     h = x[1:] - x[:-1]
     d = (y[1:] - y[:-1]) / h
     b = 6 * (d[1:] - d[:-1])
