@@ -1,6 +1,6 @@
+
 import matplotlib.pyplot as plt
 import numpy as np
-
 
 
 M = 30
@@ -12,21 +12,19 @@ A = []
 for i in range(len(t)):
     tmp = []
     for j in range(len(t)):
-        if j == 0 or j==M:
-            tmp.append(1/2 * np.exp(t[i] - t[j]))
+        if j == 0 or j == M:
+            tmp.append(0.5 * np.exp(t[i] - t[j]))
         else:
-            tmp.append(2 * (1/2 * np.exp(t[i] - t[j])))
-    tmp = np.array(tmp) * h/2
+            tmp.append(2 * (0.5 * np.exp(t[i] - t[j])))
+    tmp = np.array(tmp) * h / 2
     A.append(tmp)
 
 A = A - np.eye(len(t))
-B = -1 * np.ones(len(t))
+B = -np.ones(len(t))
 
 res = np.linalg.solve(A, B)
 
-
-
-c = 1 + ((np.exp(1) - 1)/np.exp(1)) * np.exp(t)
+c = 1 + ((np.e - 1) / np.e) * np.exp(t)
 
 plt.plot(t, res)
 plt.plot(t, c)

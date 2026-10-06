@@ -2,13 +2,14 @@
 import numpy as np
 
 
-def T(a, b, f, M):
+def Trapezoid(a, b, f, M):
     h = (b - a) / M
     x = np.linspace(a, b, M + 1)
     y = f(x)
     return h / 2 * (2 * np.sum(y) - f(a) - f(b))
 
-def S(a, b, f, M):
+
+def Simpson(a, b, f, M):
     h = (b - a) / M
     x = np.linspace(a, b, M + 1)
     y = f(x)
@@ -25,7 +26,7 @@ a, b = 0, 2
 M_t = 16 # Илюха считал
 M_s = 4 # Вася считала
 
-print(T(a, b, f, M_t) - np.log(3/2))
-print(S(a, b, f, M_s) - np.log(3/2))
+print(Trapezoid(a, b, f, M_t) - np.log(3/2))
+print(Simpson(a, b, f, M_s) - np.log(3/2))
 
 

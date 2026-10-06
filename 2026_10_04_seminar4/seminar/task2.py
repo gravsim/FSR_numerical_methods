@@ -2,7 +2,7 @@
 import numpy as np
 
 
-def S(a, b, f, M):
+def Simpson(a, b, f, M):
     h = (b - a) / M
     x = np.linspace(a, b, M + 1)
     y = f(x)
@@ -12,7 +12,7 @@ def S(a, b, f, M):
     return h / 3 * (sum1 + sum2 + sum3)
 
 
-def T(a, b, f, M):
+def Trapezoid(a, b, f, M):
     h = (b - a) / M
     x = np.linspace(a, b, M + 1)
     y = f(x)
@@ -23,13 +23,12 @@ def f(x):
     return 4 / (1 + np.power(x, 2))
 
 
-
 a, b = 0, 1
 M = 60
 
-print(T(a, b, f, M))
-print(S(a, b, f, M))
-print(S(a, b, f, M-1))
+print(Trapezoid(a, b, f, M))
+print(Simpson(a, b, f, M))
+print(Simpson(a, b, f, M-1))
 print(np.pi)
 
 
