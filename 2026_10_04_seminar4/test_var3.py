@@ -15,7 +15,7 @@ def Trapezoid(a, b, f, n):
 def Romberg(a, b, f, eps):
     R = [[Trapezoid(a, b, f, 0)],
          [Trapezoid(a, b, f, 1)]]
-    R[1].append(R[1][0] + (R[1][0] - R[0][0]) / (4 ** 1 + 1))
+    R[1].append(R[1][0] + (R[1][0] - R[0][0]) / (4 ** 1 - 1))
     i = 2
     while np.abs(R[-1][-1] - R[-1][-2]) > eps:
         R.append([])

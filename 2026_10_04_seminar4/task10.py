@@ -1,6 +1,6 @@
 
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 def core(t_i, t_j):
@@ -8,8 +8,8 @@ def core(t_i, t_j):
 
 
 def get_x(a, b, t, M):
-    h = (b - a) / M
     A = []
+    h = (b - a) / M
     for i in range(len(t)):
         tmp = []
         for j in range(len(t)):
@@ -17,28 +17,26 @@ def get_x(a, b, t, M):
                 tmp.append(core(t[i], t[j]))
             else:
                 tmp.append(2 * core(t[i], t[j]))
-        tmp = np.array(tmp) * h / 2
         A.append(tmp)
-
-    A -= np.eye(len(t))
+    A = h / 2 * np.array(A) - np.eye(len(t))
     B = -np.ones(len(t))
+    return np.linalg.solve(A, B)
 
-    res = np.linalg.solve(A, B)
-    return res
 
-M = 30
 a = 0
 b = 1
+M = 10
 t = np.linspace(a, b, M + 1)
 
+answer = 1 + (np.e - 1) / np.e * np.exp(t)
 result = get_x(a, b, t, M)
-analytical = 1 + ((np.e - 1) / np.e) * np.exp(t)
 
 fig, ax = plt.subplots(1, 2)
 ax[0].plot(t, result, color='red', label='result')
-ax[0].plot(t, analytical, color='black', linestyle='--', label='analytical')
+ax[0].plot(t, answer, color='black', linestyle='--', label='analytical')
 
-ax[1].plot(t, result - analytical, label='difference')
+ax[1].plot(t, result - answer, label='difference')
 ax[0].legend()
 ax[1].legend()
 plt.show()
+
