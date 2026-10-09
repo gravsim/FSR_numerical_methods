@@ -28,7 +28,7 @@ M = 60
 
 print(Trapezoid(a, b, f, M))
 print(Simpson(a, b, f, M))
-print(Simpson(a, b, f, M-1))
+print(Simpson(a, b, f, M - 1))
 print(np.pi)
 
 
