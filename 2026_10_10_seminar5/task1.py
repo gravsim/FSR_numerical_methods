@@ -20,5 +20,6 @@ print(f"Erf: {erf(1)}")
 print(f"Simpson: {Simpson(a, b, error_function, M)}")
 for N in [2, 3, 5]:
     roots, weights = roots_legendre(N)
+    # print(weights)
     legendre = np.sum(error_function(roots) * weights)
     print(f"N: {N}, Legendre: {legendre}")
