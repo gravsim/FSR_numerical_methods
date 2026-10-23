@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.special import roots_laguerre
-from math import factorial
+
 
 lam = 67
 N = 2
