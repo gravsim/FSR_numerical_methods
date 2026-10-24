@@ -15,27 +15,27 @@ def analytical(t):
     return -4 + 6 * t / np.pi + np.pi ** 2 * np.sin(t)
 
 
-def get_x(a, b, t, M):
+def get_x(t, w):
     A = []
-    h = (b - a) / M
     for i in range(len(t)):
         tmp = []
         for j in range(len(t)):
-            w = 1 if j == 0 or j == M else 2
-            tmp.append(w * core(t[i], t[j]))
+            tmp.append(w[j] * core(t[i], t[j]))
         A.append(tmp)
-    A = h / 2 * np.array(A) - np.eye(len(t))
-    b = -heterogeneity(t)
-    return np.linalg.solve(A, b)
+    A = np.array(A) - np.eye(len(t))
+    B = -heterogeneity(t)
+    return np.linalg.solve(A, B)
 
 
 a = np.pi / 2
 b = 3 * np.pi / 2
-M = 100
-t = np.linspace(a, b, M + 1)
-x = get_x(a, b, t, M)
+M = 3
+t, w = leggauss(M + 1)
+t = (a + b) / 2 + (b - a) / 2 * t
+w = (b - a) / 2 * w
+x = get_x(t, w)
 
 plt.plot(t, x, label='numerical')
-plt.plot(t, analytical(t), label='analytical')
+plt.plot(t, analytical(t), '--', label='analytical', color='black')
 plt.legend()
 plt.show()
