@@ -25,16 +25,14 @@ def RK2(f, y0, t0, N, h):
     return t_s, y_s
 
 
-N = 100
+N = 10
 h = 0.1
 
-M = 10
-y_start = np.linspace(-2, 2, M)
-for i in range(M):
-    t0 = -1
-    y0 = y_start[i]
-    # t_s1, y_s1 = Euler(f_der, y0, t0, N, h)
-    t_s2, y_s2 = RK2(f_der, y0, t0, N, h)
-    # plt.plot(t_s1, y_s1, color='red')
-    plt.plot(t_s2, y_s2, color='green')
+
+t0 = 1
+y0 = -0.2
+t_s1, y_s1 = Euler(f_der, y0, t0, N, h)
+t_s2, y_s2 = RK2(f_der, y0, t0, N, h)
+plt.plot(t_s1, y_s1, label="Euler")
+plt.plot(t_s2, y_s2, label="RK2")
 plt.show()
