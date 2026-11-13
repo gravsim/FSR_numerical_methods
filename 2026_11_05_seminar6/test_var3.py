@@ -4,40 +4,26 @@ from scipy.integrate import solve_ivp
 
 
 def dy_dt(t, y):
-    return np.array([3 * y[0], 2 * y[0] + y[1]])
+    return np.array([y[0], 3 * y[0] - y[1]])
 
-
-def Euler(f, t0, y0, N, h):
-    t_s = np.linspace(t0, t0 + h * N, N + 1)
-    y_s = np.zeros((N + 1, 2))
-    y_s[0] = y0
+def RK2(f, y0, t0, h, N):
+    t_arr = np.linspace(t0, t0 + h * N, N + 1)
+    y_arr = np.zeros((N + 1, 2))
+    y_arr[0] = y0
     for i in range(N):
-        y_s[i + 1] = y_s[i] + h * f(t_s[i], y_s[i])
-    return t_s, y_s
+        k1 = h * f(t_arr[i], y_arr[i])
+        k2 = h * f(t_arr[i] + h / 2, y_arr[i] + k1 / 2)
+        y_arr[i + 1] = y_arr[i] + k2
+    return t_arr, y_arr
 
 
-def RK2(f, t0, y0, N, h):
-    t_s = np.linspace(t0, t0 + h * N, N + 1)
-    y_s = np.zeros((N + 1, 2))
-    y_s[0] = y0
-    for i in range(N):
-        k1 = h * f(t_s[i], y_s[i])
-        k2 = h * f(t_s[i] + h / 2, y_s[i] + k1 / 2)
-        y_s[i + 1] = y_s[i] + k2
-    return t_s, y_s
-
-N = 200
-h = 0.002
-
-M = 10
-
-grid = np.linspace(-1, 1, M)
-xx, yy = np.meshgrid(grid, grid)
-for i in range(len(xx)):
-    for j in range(len(xx)):
-        y0 = np.array([xx[i][j], yy[i][j]])
-        t0 = 1
-        t_s, y_s = RK2(dy_dt, t0, y0, N, h)
-        # print(t_s, y_s)
-        plt.plot(y_s[:, 0], y_s[:, 1])
+h = 0.1
+N = 10
+starts = np.array([[1, 1], [-1, 1], [1, -1], [-1, -1]])
+for i, y0 in enumerate(starts):
+    t0 = 0
+    t_arr, y_arr = RK2(dy_dt, y0, t0, h, N)
+    plt.plot(y_arr[:, 0], y_arr[:, 1])
+plt.gca().set_aspect("equal")
+plt.grid()
 plt.show()
