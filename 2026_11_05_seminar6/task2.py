@@ -26,18 +26,17 @@ def RK2(f, t0, y0, N, h):
         y_s[i + 1] = y_s[i] + k2
     return t_s, y_s
 
-N = 200
-h = 0.002
+N = 10
+h = 0.1
 
-M = 10
+t0 = 1
+y0 = np.array([1, -0.5])
+t_s1, y_s1 = Euler(dy_dt, t0, y0, N, h)
+t_s2, y_s2 = RK2(dy_dt, t0, y0, N, h)
 
-grid = np.linspace(-1, 1, M)
-xx, yy = np.meshgrid(grid, grid)
-for i in range(len(xx)):
-    for j in range(len(xx)):
-        y0 = np.array([xx[i][j], yy[i][j]])
-        t0 = 1
-        t_s, y_s = RK2(dy_dt, t0, y0, N, h)
-        # print(t_s, y_s)
-        plt.plot(y_s[:, 0], y_s[:, 1])
+plt.plot(y_s1[:, 0], y_s1[:, 1], label="Euler")
+plt.plot(y_s2[:, 0], y_s2[:, 1], label="RK2")
+
+plt.legend()
+
 plt.show()

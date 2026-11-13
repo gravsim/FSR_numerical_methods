@@ -6,7 +6,7 @@ def f_der(x, y):
 
 
 def Euler(f, y0, t0, N, h):
-    t_s = np.linspace(t0, t0 + h * (N + 1), N + 1)
+    t_s = np.linspace(t0, t0 + h * N, N + 1)
     y_s = np.zeros(N + 1)
     y_s[0] = y0
     for i in range(N):
@@ -15,7 +15,7 @@ def Euler(f, y0, t0, N, h):
 
 
 def RK2(f, y0, t0, N, h):
-    t_s = np.linspace(t0, t0 + h * (N + 1), N + 1)
+    t_s = np.linspace(t0, t0 + h * N, N + 1)
     y_s = np.zeros(N + 1)
     y_s[0] = y0
     for i in range(N):
@@ -33,6 +33,10 @@ t0 = 1
 y0 = -0.2
 t_s1, y_s1 = Euler(f_der, y0, t0, N, h)
 t_s2, y_s2 = RK2(f_der, y0, t0, N, h)
-plt.plot(t_s1, y_s1, label="Euler")
-plt.plot(t_s2, y_s2, label="RK2")
+fig, ax = plt.subplots(ncols=1, nrows=2)
+ax[0].plot(t_s1, y_s1, label="Euler")
+ax[0].plot(t_s2, y_s2, label="RK2")
+ax[1].plot(y_s2, f_der(t_s2, y_s2), label="Фазовый портрет")
+ax[0].legend()
+ax[1].legend()
 plt.show()
