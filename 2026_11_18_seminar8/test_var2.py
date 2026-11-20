@@ -1,28 +1,27 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.optimize import fsolve
-
 
 
 def f_der(t, y):
-    return np.array([y[1], np.sin(2 * t) - 2 * y[1] - 9 * y[0]])
+    return y * np.cos(3 * t)
 
 
-def Euler_impl(f, t0, y0, h, N):
-    t_arr = np.linspace(t0, t0 + h * N, N + 1)
-    y_arr = np.zeros((N + 1, 2))
-    y_arr[0] = y0
-    for i in range(N):
-        def func(y):
-            return y - y_arr[i] - h * f(t_arr[i + 1], y)
-        y_arr[i + 1] = fsolve(func, y_arr[i], xtol=1e-5)
-    return t_arr, y_arr
+def method(f, t0, y0, a, b, N):
+    h = (b - a) / N
+    t = np.linspace(t0, t0 + h * N, N + 1)
+    y = [y0, y0 + h * f(t0, y0)]
+    for i in range(1, N):
+        y.append(y[-1] + h * (3 / 2 * f(t[i], y[-1]) - 1 / 2 * f(t[i - 1], y[-2])))
+    return t, y
 
-y0 = np.array([2, 1])
 t0 = 0
-h = 0.01
+y0 = 1
+a = 0
+b = 5
 N = 100
+t, y = method(f_der, t0, y0, a, b, N)
 
-t_arr, y_arr = Euler_impl(f_der, t0, y0, h, N)
-plt.plot(t_arr, y_arr[:, 0])
+plt.plot(t, y, label="Numerical")
+plt.plot(t, np.exp(np.sin(3 * t) / 3), label="Analytical")
+plt.legend()
 plt.show()

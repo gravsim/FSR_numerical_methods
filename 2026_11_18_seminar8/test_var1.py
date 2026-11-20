@@ -1,28 +1,28 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.optimize import fsolve
 
 
+def f_der(t, y):
+    return y ** 2
 
-def f_der(x, y):
-    return (-y - 2 * x) / y
+
+def method(f, y0, t0, a, b, N):
+    h = (b - a) / N
+    t = np.linspace(t0, t0 + h * N, N + 1)
+    y = [y0, y0 + h * f(t0, y0)]
+    for i in range(1, N):
+        y.append(y[-2] + 2 * h * f(t[i], y[-1]))
+    return t, y
 
 
-def Euler_impl(f, t0, y0, h, N):
-    t_arr = np.linspace(t0, t0 + h * N, N + 1)
-    y_arr = np.zeros((N + 1))
-    y_arr[0] = y0
-    for i in range(N):
-        def func(y):
-            return y - y_arr[i] - h * f(t_arr[i + 1], y)
-        y_arr[i + 1] = fsolve(func, y_arr[i], xtol=1e-5)[0]
-    return t_arr, y_arr
-
-y0 = -1
-t0 = -1
-h = 0.01
+t0 = 0
+y0 = 1
+a = 0
+b = 0.9
 N = 100
-
-t_arr, y_arr = Euler_impl(f_der, t0, y0, h, N)
-plt.plot(t_arr, y_arr)
+t, y = method(f_der, y0, t0, a, b, N)
+C = -1
+plt.plot(t, y, label="Numerical")
+plt.plot(t, -1 / (t + C), label="Analytical")
+plt.legend()
 plt.show()
